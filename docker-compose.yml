@@ -1,0 +1,63 @@
+version: '3'
+
+
+services:
+    login:
+      image: sixth_joyphp
+      volumes:
+        - ./login/src:/var/www/html
+      ports:
+        - 80:80
+      links:
+        - mysql
+      depends_on:
+        - mysql
+    library:
+      image: sixth_joyphp
+      volumes:
+        - ./library/src:/var/www/html
+      ports:
+        - 8081:80
+      links:
+        - mysql
+      depends_on:
+        - mysql
+    education:
+      image: sixth_joyphp
+      volumes:
+        - ./education/src:/var/www/html
+      ports:
+        - 8084:80
+      links:
+        - mysql
+      depends_on:
+        - mysql
+    nutrition:
+      image: sixth_joyphp
+      volumes:
+        - ./nutrition/src:/var/www/html
+      ports:
+        - 8082:80
+      links:
+        - mysql
+      depends_on:
+        - mysql
+    mysql:
+      image: mysql:5.7
+      environment:
+        - MYSQL_ROOT_PASSWORD=password
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      environment:
+        - MYSQL_ROOT_PASSWORD=password
+        - PMA_HOST=mysql
+      ports:
+        - 8083:80
+    authentication:
+      image: makbn/cc-authentication-service:v2
+      ports:
+        - 8080:8080
+      links:
+        - mysql:db_service_host
+      environment:
+        DB_HOST: mysql
