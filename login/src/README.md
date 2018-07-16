@@ -1,0 +1,3 @@
+in docker-compose.yml login page port has been set to localhost 80 port because of that if you type localhost(127.0.0.1) in your browser, login page will be appeared.<br>
+after username and password completation press submit button. username and password will be chcked by the <i>is_loggedin()</i> function. is_loggedin() function entrnace are username and password valuse, then it sends these two values to the authentication server and if the user exists in database returns a session. the returned session is going to be used when ever we need to use is_authenticated() function.
+hence, if is_loggedin() function returns session we are able to see nutrition,library and education links otherwise, we have to go to the login page and try to login again. 
